@@ -1,8 +1,9 @@
 //memory_cache.cxx
 #include <map>
 #include <iostream>
+#include <functional>
 #include "d:/workspace/dxh/testult.h"
-#include "d:/workspace/dxh/bind_mem_fun.h"
+//#include "d:/workspace/dxh/bind_mem_fun.h"
 using namespace std;
 
 // traits declare for memory_cache.
@@ -70,10 +71,12 @@ int main()
  		cout  << (x.first) << ":"	<< (*(x.second)) << "\n";
  		delete x.second;
  	}
-
+ 	using namespace std::placeholders;  // for _1, _2, _3...
 	CRandpool a;
-	typedef bind_mem_fun_t<int *(CRandpool::*)(int const&)> class_adaptor_type;	
-	memory_cache<int, int, class_adaptor_type> xcx(bind_mem_fun(&a, &CRandpool::Gen_random));
+	//typedef bind_mem_fun_t<int *(CRandpool::*)(int const&)> class_adaptor_type;
+	//memory_cache<int, int, class_adaptor_type> xcx(bind_mem_fun(&a, &CRandpool::Gen_random));
+	auto fn = std::bind(&CRandpool::Gen_random, &a, _1);	
+	memory_cache<int, int, decltype(fn)> xcx(fn);
 	cout << "Class adaptor.\n";
 	xcx.get(0);
 	xcx.get(1);
