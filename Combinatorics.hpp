@@ -4,11 +4,30 @@
 #include <algorithm>
 #include <ctime>
 using namespace std;
+
+
+template <typename T, typename F>
+void enum_subset(vector<T> const & v, F f){
+	int indicate = 0;
+	while (indicate < pow(2, v.size())){ // C(1,N) + C(2,N) +.. + C(N, N) = 2 ^ (N)
+		vector<T> r;
+		for (int j = 0; j < v.size(); ++j){
+			if (indicate & (1 << j)){
+				r.insert(r.begin(),v[j]);
+			}
+		}
+		f(r);
+		indicate++;
+	}
+		
+}
+
+
 // 保存当前的一组索引，每迭代把最前的索引加一，循环归零，然后使下一个索引加一。
 // 就像是数数目字般，个位数从0至9，满了就归零，然后十进位加一
 template <typename T, typename F>
 int product(vector<vector<T> > const &s, F f){
-    vector<size_t> indices(s.size()); //每个子数组的索引
+    vector<size_t> indices(s.size()); // 当前每个子数组的索引
     size_t i = 0;
     while (i < s.size()) {
         vector<T> r;
