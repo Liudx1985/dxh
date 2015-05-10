@@ -84,7 +84,51 @@ int enum_combinations(_Int itBegin, _Int itEnd, _PredBin proc)
     }
     return iCount;
 }
-// TODO : Static Algorithms using template .
+
+/*
+ m * n matrix, loop via diag-wrap line
+*/
+template <typename F>
+void Diagloop(int m, int n, F f) {
+	bool bFlag = true; // flip when achived next diag line, first down then 
+	int i = 0, j = 0; 	// the pos in grid. 
+	for (int k = 0; k < m * n; ++k){
+		// if (i >= m || j >= n) {
+		// 	break;
+		// }
+		f (i, j);
+		if (bFlag) {
+			if (i + 1 < m && j - 1 >= 0) {
+				++i;
+				--j;
+			}
+			else {
+				bFlag = false;
+				if (i + 1 < m) {
+					++i;
+				} 
+				else { // meet the diag core
+					++j;
+				}
+			}			
+		}
+		else {
+			if (i - 1 >= 0 && j + 1 < n) {
+				++j;
+				--i;
+			}
+			else {
+				bFlag = true;
+				if (j + 1 < n) {
+					++j;
+				} 
+				else { // meet the diag core
+					++i;
+				}
+			}	
+		}
+	}
+}
 
 #ifdef _TEST_
 int main()
@@ -102,5 +146,25 @@ int main()
         }
     );
     clock_t end = clock();
+}
+//
+int test_diag_loop()
+{
+	int t = 0;
+	const int m = 10;
+	const int n = 10;
+	int a[m][n];	
+	// memset/
+	Diagloop(m, n, [&a,&t](int i, int j) {
+		a[i][j] = t++;
+	});
+
+	
+	for (int i = 0; i < m; ++i) {
+		for (int j = 0; j < n; ++j) {
+			cout << a[i][j] + 1 << "\t";
+		}
+		cout << "\n";
+	}
 }
 #endif // def _TEST_
