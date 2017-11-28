@@ -1,9 +1,4 @@
 ///////////////////////////////////////////////////////////////////////////////
-//
-// Copyright (c) 2007, Software R&D Section,FiberHome Telecom. Tech.
-// Co.,Ltd
-// All rights reserved.
-//
 // platform.h
 //
 // Author : Liudx
