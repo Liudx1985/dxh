@@ -3,13 +3,8 @@
 #define _BIND_MEM_FUN_H_
 
 ///////////////////////////////////////////////////////////////////////////////
-//
-// Copyright (c) 2007, Software R&D Section,FiberHome Telecom. Tech.
-// Co.,Ltd
-// All rights reserved.
-//
 // bind_mem_fun.h
-//
+// -*- c++ -*-
 // Author : Liudx
 // Email: Liudx@fiberhome.com.cn
 // Date: 2011-7-11
