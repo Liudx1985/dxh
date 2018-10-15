@@ -6,7 +6,7 @@
 // bind_mem_fun.h
 // -*- c++ -*-
 // Author : Liudx
-// Email: Liudx@fiberhome.com.cn
+// Email: Liudx1985@gmail.com
 // Date: 2011-7-11
 // -----------------------------------------------------------------------
 
